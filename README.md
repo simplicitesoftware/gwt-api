@@ -1,27 +1,27 @@
-gwt-api
-=======
+![](http://www.simplicitesoftware.com/logos/logo250.png)
+---
 
-Simplicite(R) GoogleWebToolkit API and demo
+Simplicit&eacute;&reg; GoogleWebToolkit&reg; API
+================================================
 
+Introduction
+------------
 
-Prérequis
+This is the GoogleWebToolkit&reg; API for the [Simplicit&eacute;&reg; platform](http://www.simplicitesoftware.com).
 
-0) Installer le plugin Google et le tookit GWT
+License
+-------
 
-Pour lancer l'application :
+Copyright Simplicit&eacute; Software
 
-1) La compiler (bouton de droite sur le projet > Google > Compile)
-2) le déployer (ant deploy ou ant devdeploy) après avoir ajusté les settings dans build.properties
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-Pour travailler en mode debug :
+[](http://www.apache.org/licenses/LICENSE-2.0)
 
-3) lancer l'appli en mode debug avec l'option "sur un serveur externe" (clic droit sur le projet > Debug As... > Google Web Application (running on an external server))
-préciser la racine de la webapp sur le serveur (ex: http://localhost:8080/simplicite_gwt/) en selectionnant index.html comme page de départ
-sur la vue "Development mode" clic droit > Open (ex: sur http://localhost:8080/simplicite_gwt/index.html?gwt.codesvr=127.0.0.1:9997)
-
-Sinon :
-
-3bis) Ouvrir l'appli sur un navigateur http://localhost:8080/simplicite_gwt/
-
-Enjoy !
-
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
