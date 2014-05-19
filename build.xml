@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+
+<project name="simplicite_gwt" basedir=".">
+
+	<property file="build.properties"/>
+
+	<target name="prepare" description="Prepare">
+		<delete file="war/common.js"/>
+		<echo file="war/common.js">var APPLICATION = "${gwt.application}";
+var LOGIN = "${gwt.login}";
+var PASSWORD = "${gwt.password}";</echo>
+	</target>
+		
+	<target name="war" description="War" depends="prepare">
+		<mkdir dir="build"/>
+		<delete file="build/simplicite_gwt.war"/>
+		<jar jarfile="build/simplicite_gwt.war" basedir="war" excludes="WEB-INF/classes/**,WEB-INF/lib/**,simplicitews/**,**/.cvsignore,**/CVS/**"/>
+	</target>
+
+	<target name="deploy" description="Deploy" depends="war">
+		<copy file="build/simplicite_gwt.war" todir="${jboss.root}/server/${jboss.server}/deploy" overwrite="true"/>
+	</target>
+
+	<target name="devdeploy" description="Deploy for dev" depends="prepare">
+		<delete dir="${jboss.deploydir}/simplicite_gwt.war"/>
+		<mkdir dir="${jboss.deploydir}/simplicite_gwt.war"/>
+		<copy todir="${jboss.deploydir}/simplicite_gwt.war">
+			<fileset dir="war" excludes="WEB-INF/classes/**,WEB-INF/lib/**,simplicitews/**,**/.cvsignore,**/CVS/**"/>
+		</copy>
+	</target>
+
+	<target name="install" description="Install as GWT rich UI in simplicite project">
+		<delete dir="${gwt.simplicite.project}/web/jsp/gwt/simplicite_gwt"/>
+		<copy todir="${gwt.simplicite.project}/web/jsp/gwt" overwrite="true">
+			<fileset dir="war" excludes="WEB-INF/**,index.html,common.js,.cvsignore,CVS/**,**/.cvsignore,**/CVS/**"/>
+		</copy>
+	</target>
+	
+	<path id="javadoc.classpath">
+		<!-- fileset dir="${gwtsdk.root}">
+			<include name="*.jar"/>
+		</fileset -->
+		<fileset dir="war/WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+		
+	<target name="javadoc" description="JavaDoc">
+		<delete dir="doc/V${gwt.simplicite.version}"/>
+		<mkdir dir="doc/V${gwt.simplicite.version}"/>
+        <javadoc
+        	access="public"
+        	author="false" 
+        	destdir="doc/V${gwt.simplicite.version}" 
+        	nodeprecated="false"
+        	nodeprecatedlist="false"
+        	noindex="false"
+        	classpathref="javadoc.classpath"
+        	nonavbar="false"
+        	notree="false" 
+        	splitindex="true"
+        	use="true"
+        	version="true">
+	        <packageset dir="src" defaultexcludes="yes">
+				<include name="com/simplicite/gwt/core"/>
+				<include name="com/simplicite/gwt/ui"/>
+	        </packageset>
+			<doctitle><![CDATA[%%TITLE%% GWT version ${gwt.simplicite.version}]]></doctitle>
+			<bottom><![CDATA[<i>Copyright ${gwt.simplicite.copyright}. All Rights Reserved.</i>]]></bottom>
+			<link href="http://www.simplicite.fr"/>
+		</javadoc>    	
+    	<copy file="doc/simplicite.jpg" todir="doc/V${gwt.simplicite.version}"/>
+   		<replace file="doc/V${gwt.simplicite.version}/overview-summary.html" token="%%TITLE%%">
+   			<replacevalue><![CDATA[<img src="simplicite.jpg" align="center"/>]]></replacevalue>
+		</replace>
+   		<replace file="doc/V${gwt.simplicite.version}/stylesheet.css" token="body { " value="body { font-family: Arial, Helvetica, sans-serif; "/>
+		<zip destfile="doc/javadocSimpliciteGWT-${gwt.simplicite.version}.zip" update="false">
+			<zipfileset dir="doc/V${gwt.simplicite.version}" includes="**"/>
+		</zip>
+    </target>
+
+</project>

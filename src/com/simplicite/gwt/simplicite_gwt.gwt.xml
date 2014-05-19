@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="simplicite_gwt">
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.json.JSON" /> 
+	<inherits name="com.google.gwt.http.HTTP" />
+	<inherits name="com.google.gwt.user.theme.standard.Standard" />
+	<entry-point class="com.simplicite.gwt.demo.Demo" />
+	<source path="core" />
+	<source path="ui" />
+	<source path="demo" />
+</module>
