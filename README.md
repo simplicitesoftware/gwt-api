@@ -4,6 +4,11 @@
 Simplicit&eacute;&reg; GoogleWebToolkit&reg; API
 ================================================
 
+Deprecation notice
+------------------
+
+This API is **deprecated** and is **not maintained** anymore.
+
 Introduction
 ------------
 
